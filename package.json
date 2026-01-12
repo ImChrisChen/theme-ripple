@@ -2,51 +2,78 @@
   "name": "@imccc/use-transition-change-theme",
   "private": false,
   "version": "1.1.2",
-  "main": "dist/index.mjs",
+  "description": "Smooth theme transitions for Vue and React using View Transition API",
+  "main": "dist/index.cjs",
+  "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "rollup -w -c",
-    "build": "rollup -c"
-  },
   "exports": {
     ".": {
-      "types": [
-        "./dist/index.d.ts"
-      ],
-      "require": [
-        "./dist/index.cjs"
-      ],
-      "import": [
-        "./dist/index.mjs"
-      ]
+      "types": "./dist/index.d.ts",
+      "require": "./dist/index.cjs",
+      "import": "./dist/index.mjs"
     }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "dev": "rollup -w -c",
+    "build": "rollup -c",
+    "prepublishOnly": "pnpm run build",
+    "release": "pnpm version patch && pnpm publish --access public",
+    "release:minor": "pnpm version minor && pnpm publish --access public",
+    "release:major": "pnpm version major && pnpm publish --access public"
   },
   "type": "module",
   "keywords": [
     "theme",
     "theme-transition",
-    "toggle-theme"
+    "toggle-theme",
+    "vue",
+    "react",
+    "view-transition-api",
+    "dark-mode",
+    "light-mode",
+    "animation"
   ],
-  "author": "imchrisorz@gmail.com",
-  "repository": "https://github.com/ImChrisChen/use-transition-change-theme",
+  "author": "ImChrisChen <imchrisorz@gmail.com>",
+  "homepage": "https://github.com/ImChrisChen/use-transition-change-theme#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ImChrisChen/use-transition-change-theme.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ImChrisChen/use-transition-change-theme/issues"
+  },
   "license": "MIT",
-  "description": "A vue hook to change theme with transition",
+  "peerDependencies": {
+    "vue": "^3.4.0",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0"
+  },
+  "peerDependenciesMeta": {
+    "vue": {
+      "optional": true
+    },
+    "react": {
+      "optional": true
+    },
+    "react-dom": {
+      "optional": true
+    }
+  },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^25.0.8",
+    "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.7",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
     "rollup": "^4.18.0",
     "rollup-plugin-typescript2": "^0.36.0",
     "rollup-plugin-vue": "^6.0.0",
     "typescript": "^5.4.5",
     "vue": "^3.5.0"
-  },
-  "peerDependencies": {
-    "vue": "^3.5.0"
-  },
-  "dependencies": {
-    "@types/react": "^18.3.3",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1"
   }
 }

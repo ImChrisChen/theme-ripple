@@ -1,9 +1,18 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Vue 主题切换演示</title>
+  <title>Vue Theme Transition Demo | use-transition-change-theme</title>
+  <meta name="description"
+    content="Interactive demo of smooth theme transitions in Vue using View Transition API. Toggle between light and dark themes with beautiful circular animations.">
+  <meta name="keywords" content="vue, theme transition, dark mode, light mode, view transition api, animation, demo">
+  <meta name="author" content="ImChrisChen">
+  <meta property="og:title" content="Vue Theme Transition Demo">
+  <meta property="og:description" content="Smooth theme transitions for Vue using View Transition API">
+  <meta property="og:type" content="website">
+  <link rel="canonical" href="https://github.com/ImChrisChen/use-transition-change-theme">
   <style>
     * {
       margin: 0;
@@ -33,21 +42,21 @@
       color: white;
       margin-bottom: 40px;
       font-size: 2.5rem;
-      text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
     }
 
     .control-panel {
-      background: rgba(255,255,255,0.15);
+      background: rgba(255, 255, 255, 0.15);
       backdrop-filter: blur(10px);
       border-radius: 20px;
       padding: 30px;
       margin-bottom: 30px;
-      border: 1px solid rgba(255,255,255,0.2);
+      border: 1px solid rgba(255, 255, 255, 0.2);
     }
 
     html.dark .control-panel {
-      background: rgba(0,0,0,0.3);
-      border-color: rgba(255,255,255,0.1);
+      background: rgba(0, 0, 0, 0.3);
+      border-color: rgba(255, 255, 255, 0.1);
     }
 
     .control-group {
@@ -69,7 +78,7 @@
       width: 100%;
       height: 8px;
       border-radius: 4px;
-      background: rgba(255,255,255,0.3);
+      background: rgba(255, 255, 255, 0.3);
       outline: none;
       -webkit-appearance: none;
     }
@@ -81,7 +90,7 @@
       border-radius: 50%;
       background: white;
       cursor: pointer;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
     }
 
     select {
@@ -89,19 +98,19 @@
       padding: 12px 16px;
       border: none;
       border-radius: 10px;
-      background: rgba(255,255,255,0.9);
+      background: rgba(255, 255, 255, 0.9);
       font-size: 16px;
       cursor: pointer;
       outline: none;
     }
 
     html.dark select {
-      background: rgba(50,50,70,0.9);
+      background: rgba(50, 50, 70, 0.9);
       color: white;
     }
 
     .value-display {
-      color: rgba(255,255,255,0.8);
+      color: rgba(255, 255, 255, 0.8);
       font-size: 14px;
       margin-top: 5px;
     }
@@ -140,18 +149,18 @@
     }
 
     .status-card {
-      background: rgba(255,255,255,0.15);
+      background: rgba(255, 255, 255, 0.15);
       backdrop-filter: blur(10px);
       border-radius: 20px;
       padding: 30px;
       margin-top: 30px;
-      border: 1px solid rgba(255,255,255,0.2);
+      border: 1px solid rgba(255, 255, 255, 0.2);
       text-align: center;
     }
 
     html.dark .status-card {
-      background: rgba(0,0,0,0.3);
-      border-color: rgba(255,255,255,0.1);
+      background: rgba(0, 0, 0, 0.3);
+      border-color: rgba(255, 255, 255, 0.1);
     }
 
     .status-card h3 {
@@ -164,7 +173,7 @@
       align-items: center;
       gap: 10px;
       padding: 10px 20px;
-      background: rgba(255,255,255,0.2);
+      background: rgba(255, 255, 255, 0.2);
       border-radius: 30px;
       color: white;
       font-weight: 500;
@@ -182,17 +191,17 @@
     }
 
     .demo-card {
-      background: rgba(255,255,255,0.15);
+      background: rgba(255, 255, 255, 0.15);
       backdrop-filter: blur(10px);
       border-radius: 15px;
       padding: 25px;
-      border: 1px solid rgba(255,255,255,0.2);
+      border: 1px solid rgba(255, 255, 255, 0.2);
       text-align: center;
     }
 
     html.dark .demo-card {
-      background: rgba(0,0,0,0.3);
-      border-color: rgba(255,255,255,0.1);
+      background: rgba(0, 0, 0, 0.3);
+      border-color: rgba(255, 255, 255, 0.1);
     }
 
     .demo-card h4 {
@@ -201,13 +210,15 @@
     }
 
     .demo-card p {
-      color: rgba(255,255,255,0.7);
+      color: rgba(255, 255, 255, 0.7);
       font-size: 14px;
     }
   </style>
 </head>
+
 <body>
   <div id="app"></div>
   <script type="module" src="./main.ts"></script>
 </body>
+
 </html>

@@ -155,19 +155,6 @@ export function updateViewTransition(
   transition.ready.then(() => {
     let { x, y, direction } = options
 
-    console.log('options:', options)
-
-    // // 如果有 direction，优先使用 direction 计算的坐标
-    // if (options.direction) {
-    //   const coords = getCoordinatesFromDirection(options.direction)
-    //   x = coords.x
-    //   y = coords.y
-    // } else if (x === undefined || y === undefined) {
-    //   // 没有任何坐标信息时兜底到中心
-    //   x = window.innerWidth / 2
-    //   y = window.innerHeight / 2
-    // }
-
     switch (direction) {
       case 'top':
         // x = 0;
@@ -213,7 +200,6 @@ export function updateViewTransition(
     if (y === undefined) y = window.innerHeight / 2
 
     const clipPath = calculateClipPath(x, y, options.borderRadius)
-    console.log('clipPath:', clipPath, x, y)
 
     // 开始动画
     executeThemeAnimation(isDark, opts, clipPath)

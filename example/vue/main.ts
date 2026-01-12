@@ -1,5 +1,8 @@
 import { createApp, ref, computed, defineComponent, h } from 'vue'
 import { useTransitionChangeTheme } from '../../src/hooks/use-transition-theme.vue'
+import type { Direction } from '../../src/interfaces'
+
+type Animation = 'ease-in' | 'ease-out' | 'linear'
 
 const App = defineComponent({
   setup() {
@@ -8,7 +11,8 @@ const App = defineComponent({
 
     // 可调参数
     const duration = ref(400)
-    const animation = ref<'ease-in' | 'ease-out' | 'linear'>('ease-in')
+    const animation = ref<Animation>('ease-in')
+    const direction = ref<Direction | undefined>(undefined)
 
     // 使用 Hook
     const { toggleTheme } = useTransitionChangeTheme(
@@ -28,12 +32,14 @@ const App = defineComponent({
         y: event.clientY,
         duration: duration.value,
         animation: animation.value,
+        direction: direction.value,
       })
     }
 
     const themeText = computed(() => isDark.value ? '🌙 暗黑模式' : '☀️ 亮色模式')
 
-    return () => h('div', { class: 'container' }, [
+    return () => h('div', { class: 'container', style: { height: '100vh', width: '100%' } }, [
+      // h('span', { class: 'framework-badge' }, '💚 Vue'),
       h('h1', '🎨 Vue 主题切换演示'),
 
       // 控制面板
@@ -60,12 +66,34 @@ const App = defineComponent({
           h('select', {
             value: animation.value,
             onChange: (e: Event) => {
-              animation.value = (e.target as HTMLSelectElement).value as any
+              animation.value = (e.target as HTMLSelectElement).value as Animation
             }
           }, [
             h('option', { value: 'ease-in' }, 'ease-in (渐入)'),
             h('option', { value: 'ease-out' }, 'ease-out (渐出)'),
             h('option', { value: 'linear' }, 'linear (线性)')
+          ])
+        ]),
+
+        // Direction 控制
+        h('div', { class: 'control-group' }, [
+          h('label', '动画方向'),
+          h('select', {
+            value: direction.value || '',
+            onChange: (e: Event) => {
+              const val = (e.target as HTMLSelectElement).value
+              direction.value = val ? val as Direction : undefined
+            }
+          }, [
+            h('option', { value: '' }, '自动 (点击位置)'),
+            h('option', { value: 'top' }, 'Top (上)'),
+            h('option', { value: 'bottom' }, 'Bottom (下)'),
+            h('option', { value: 'left' }, 'Left (左)'),
+            h('option', { value: 'right' }, 'Right (右)'),
+            h('option', { value: 'top-left' }, 'Top Left (左上)'),
+            h('option', { value: 'top-right' }, 'Top Right (右上)'),
+            h('option', { value: 'bottom-left' }, 'Bottom Left (左下)'),
+            h('option', { value: 'bottom-right' }, 'Bottom Right (右下)')
           ])
         ])
       ]),

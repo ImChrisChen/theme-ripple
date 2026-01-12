@@ -14,7 +14,7 @@ function App() {
   const [duration, setDuration] = useState(400)
   const [animation, setAnimation] = useState<Animation>('ease-in')
   const [direction, setDirection] = useState<Direction | undefined>(undefined)
-  const [borderRadius, setBorderRadius] = useState<number | undefined>(undefined)
+  // const [borderRadius, setBorderRadius] = useState<number | undefined>(undefined)
   
   // 同步 HTML class
   const setIsDark = useCallback((dark: boolean) => {
@@ -33,7 +33,6 @@ function App() {
       duration,
       animation,
       direction,
-      // borderRadius,
     })
   }
   
@@ -41,7 +40,7 @@ function App() {
   
   return (
     <div className="container" style={{height: '100vh', width: '100%'}}>
-      <span className="framework-badge">⚛️ React</span>
+      {/* <span className="framework-badge">⚛️ React</span> */}
       <h1>🎨 React 主题切换演示</h1>
       
       {/* 控制面板 */}
@@ -94,7 +93,7 @@ function App() {
         </div>
 
         {/* BorderRadius 控制 */}
-        <div className="control-group">
+        {/* <div className="control-group">
           <label>圆角大小: {borderRadius ?? '默认 (圆形)'}</label>
           <input
             type="range"
@@ -106,7 +105,7 @@ function App() {
             onChange={(e) => setBorderRadius(parseInt(e.target.value))}
           />
           <button style={{marginLeft: 8}} onClick={(e) => { e.preventDefault(); setBorderRadius(undefined); }}>重置</button>
-        </div>
+        </div> */}
       </div>
       
       {/* 切换按钮 */}
