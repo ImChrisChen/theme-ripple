@@ -16,29 +16,9 @@ import {
 export function useThemeRipple(
   isDark: Ref<boolean>,
   setIsDark: (isDark: boolean) => void,
-  isAutoChangeTheme = true
 ) {
   const isTransitioning = ref(false)
   const isSupported = ref(!!document.startViewTransition)
-  let cleanup: (() => void) | null = null
-
-  onMounted(() => {
-    // 再次更新，确保 SSR 兼容
-    isSupported.value = !!document.startViewTransition
-
-    if (!isAutoChangeTheme) return
-
-    // 设置监听器并保存清理函数
-    cleanup = setupSystemThemeListener(setIsDark)
-
-    // 初始化跟随系统
-    setIsDark(getSystemTheme())
-  })
-
-  onUnmounted(() => {
-    // 清理监听器
-    cleanup?.()
-  })
 
   return {
     /**

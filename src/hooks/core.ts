@@ -13,27 +13,34 @@ export const TRANSITION_STYLES = `
   html.dark {
     background-color: #1b1b1b;
   }
-  /* Alternative custom animation style */
+  /* 禁用默认的淡入淡出动画，使用自定义 clip-path 动画 */
   ::view-transition-old(root),
   ::view-transition-new(root) {
-    height: auto;
-    width: 100vw;
+    height: 100%;
+    width: 100%;
     animation: none;
     mix-blend-mode: normal;
+    /* Safari fix: 确保过渡元素在动画开始前保持可见 */
+    will-change: clip-path;
   }
+  /* Safari fix: 确保图层正确隔离和堆叠 */
+  ::view-transition-image-pair(root) {
+    isolation: isolate;
+  }
+  /* 切换到深色模式时：新视图（深色）在上层，从点击位置扩散 */
   html.dark::view-transition-old(root) {
     z-index: 1;
   }
   html.dark::view-transition-new(root) {
     z-index: 2147483646;
   }
-  html::view-transition-old(root) {
+  /* 切换到浅色模式时：旧视图（深色）在上层，从点击位置收缩 */
+  html:not(.dark)::view-transition-old(root) {
     z-index: 2147483646;
   }
-  html::view-transition-new(root) {
+  html:not(.dark)::view-transition-new(root) {
     z-index: 1;
   }
-}
 `
 
 /**
