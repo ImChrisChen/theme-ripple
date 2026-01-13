@@ -1,31 +1,30 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import { createRoot } from 'react-dom/client'
-import { useTransitionThemeReact } from '../../src/hooks/use-transition-theme.react'
+import { useThemeRipple } from '../../src/hooks/use-transition-theme.react'
 
 import { Direction } from '../../src/interfaces'
 
 type Animation = 'ease-in' | 'ease-out' | 'linear'
 
 function App() {
-  // 主题状态
+  // Theme state
   const [isDark, setIsDarkState] = useState(false)
   
-  // 可调参数
+  // Configurable parameters
   const [duration, setDuration] = useState(400)
-  const [animation, setAnimation] = useState<Animation>('ease-in')
+  const [animation, setAnimation] = useState<Animation>('ease-out')
   const [direction, setDirection] = useState<Direction | undefined>(undefined)
-  // const [borderRadius, setBorderRadius] = useState<number | undefined>(undefined)
   
-  // 同步 HTML class
+  // Sync HTML class
   const setIsDark = useCallback((dark: boolean) => {
     setIsDarkState(dark)
     document.documentElement.classList.toggle('dark', dark)
   }, [])
 
-  // 使用 Hook
-  const { toggleTheme } = useTransitionThemeReact(isDark, setIsDark, true)
+  // Use Hook
+  const { toggleTheme } = useThemeRipple(isDark, setIsDark, true)
   
-  // 处理点击
+  // Handle click
   const handleToggle = (event: React.MouseEvent) => {
     toggleTheme({
       x: event.clientX,
@@ -36,19 +35,38 @@ function App() {
     })
   }
   
-  const themeText = isDark ? '🌙 暗黑模式' : '☀️ 亮色模式'
+  const themeText = isDark ? '🌙 Dark Mode' : '☀️ Light Mode'
+
+  const codeExample = `const handleClick = (event) => {
+  toggleTheme({
+    x: event.clientX,
+    y: event.clientY,
+    duration: ${duration},
+    animation: '${animation}',${direction ? `\n    direction: '${direction}',` : ''}
+  })
+}`
   
   return (
-    <div className="container" style={{height: '100vh', width: '100%'}}>
-      {/* <span className="framework-badge">⚛️ React</span> */}
-      <h1>🎨 React 主题切换演示</h1>
+    <div className="container" style={{minHeight: '100vh', width: '100%', paddingBottom: '50px'}}>
       
-      {/* 控制面板 */}
-      {/* 控制面板 */}
+      <div className="header-section">
+        <h1>@imccc/theme-ripple Live Demo</h1>
+        <p className="subtitle">Switch themes as gracefully as water waves</p>
+        <div className="badges">
+          <span className="framework-badge react">React 18</span>
+          <span className="framework-badge react">Vue 3</span>
+          <a href="https://github.com/ImChrisChen/theme-ripple" target="_blank" className="github-link">
+            View on GitHub ↗
+          </a>
+        </div>
+      </div>
+      
+      {/* Control Panel */}
       <div className="control-panel">
-        {/* Duration 控制 */}
+        <h3>Configuration</h3>
+        {/* Duration Control */}
         <div className="control-group">
-          <label>动画时长: {duration}ms</label>
+          <label>Duration: {duration}ms</label>
           <input
             type="range"
             min={100}
@@ -57,84 +75,75 @@ function App() {
             value={duration}
             onChange={(e) => setDuration(parseInt(e.target.value))}
           />
-          <div className="value-display">拖动滑块调整动画时长 (100ms - 1500ms)</div>
         </div>
         
-        {/* Animation 控制 */}
+        {/* Animation Control */}
         <div className="control-group">
-          <label>动画曲线</label>
+          <label>Easing</label>
           <select
             value={animation}
             onChange={(e) => setAnimation(e.target.value as Animation)}
           >
-            <option value="ease-in">ease-in (渐入)</option>
-            <option value="ease-out">ease-out (渐出)</option>
-            <option value="linear">linear (线性)</option>
+            <option value="ease-in">ease-in</option>
+            <option value="ease-out">ease-out</option>
+            <option value="linear">linear</option>
           </select>
         </div>
 
-        {/* Direction 控制 */}
+        {/* Direction Control */}
         <div className="control-group">
-          <label>动画方向</label>
+          <label>Direction</label>
           <select
             value={direction || ''}
             onChange={(e) => setDirection(e.target.value ? (e.target.value as Direction) : undefined)}
           >
-            <option value="">自动 (点击位置)</option>
-            <option value="top">Top (上)</option>
-            <option value="bottom">Bottom (下)</option>
-            <option value="left">Left (左)</option>
-            <option value="right">Right (右)</option>
-            <option value="top-left">Top Left (左上)</option>
-            <option value="top-right">Top Right (右上)</option>
-            <option value="bottom-left">Bottom Left (左下)</option>
-            <option value="bottom-right">Bottom Right (右下)</option>
+            <option value="">Auto (Cursor Context)</option>
+            <option value="top">Top</option>
+            <option value="bottom">Bottom</option>
+            <option value="left">Left</option>
+            <option value="right">Right</option>
+            <option value="top-left">Top Left</option>
+            <option value="top-right">Top Right</option>
+            <option value="bottom-left">Bottom Left</option>
+            <option value="bottom-right">Bottom Right</option>
           </select>
         </div>
-
-        {/* BorderRadius 控制 */}
-        {/* <div className="control-group">
-          <label>圆角大小: {borderRadius ?? '默认 (圆形)'}</label>
-          <input
-            type="range"
-            min={0}
-            max={500}
-            step={10}
-            value={borderRadius ?? 0}
-            // disabled={isCorner}
-            onChange={(e) => setBorderRadius(parseInt(e.target.value))}
-          />
-          <button style={{marginLeft: 8}} onClick={(e) => { e.preventDefault(); setBorderRadius(undefined); }}>重置</button>
-        </div> */}
       </div>
       
-      {/* 切换按钮 */}
+      {/* Toggle Button */}
       <button className="theme-toggle-btn" onClick={handleToggle}>
-        点击任意位置切换主题 → {themeText}
+        Toggle Theme {isDark ? '(Dark)' : '(Light)'}
       </button>
       
-      {/* 状态卡片 */}
-      <div className="status-card">
-        <h3>当前主题状态</h3>
-        <div className="theme-indicator">
-          <span className="theme-icon">{isDark ? '🌙' : '☀️'}</span>
-          <span>{themeText}</span>
-        </div>
+      {/* Code Example */}
+      <div className="code-section">
+        <h3>Usage</h3>
+        <pre>
+          <code>{codeExample}</code>
+        </pre>
+      </div>
+
+      {/* Installation */}
+      <div className="install-section">
+        <h3>Installation</h3>
+        <pre>
+          <code>npm install @imccc/theme-ripple</code>
+        </pre>
       </div>
       
-      {/* 演示卡片 */}
+      {/* Features Grid */}
       <div className="demo-cards">
         <div className="demo-card">
-          <h4>✨ 视图过渡</h4>
-          <p>使用 View Transition API 实现平滑的主题切换动画</p>
+          <h4>✨ View Transitions</h4>
+          <p>Powered by the native View Transition API for buttery smooth animations.</p>
         </div>
         <div className="demo-card">
-          <h4>🎯 自定义坐标</h4>
-          <p>动画从点击位置开始扩散，创造自然的视觉效果</p>
+          <h4>🎯 Cursor Origin</h4>
+          <p>Ripple effect starts exactly from your click position by default.</p>
         </div>
         <div className="demo-card">
-          <h4>⚡ 高性能</h4>
-          <p>基于 CSS 动画，不阻塞主线程</p>
+          <h4>⚡ Zero Runtime</h4>
+          <p>Extremely lightweight, no heavy JS animations blocking the main thread.</p>
         </div>
       </div>
     </div>

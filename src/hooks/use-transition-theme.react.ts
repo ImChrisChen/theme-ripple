@@ -19,8 +19,12 @@ export function useThemeRipple(
   isAutoChangeTheme = true
 ) {
   const [isTransitioning, setIsTransitioning] = useState(false)
+  const [isSupported, setIsSupported] = useState(false)
 
   useEffect(() => {
+    // 检查浏览器支持情况
+    setIsSupported(!!document.startViewTransition)
+
     if (!isAutoChangeTheme) return
 
     // 初始化跟随系统
@@ -37,6 +41,12 @@ export function useThemeRipple(
    * @param options 切换选项，包含点击位置坐标
    */
   const toggleTheme = useCallback(async (options: ToggleThemeOptions) => {
+    // 如果不支持，直接切换
+    if (!document.startViewTransition) {
+      setIsDark(!isDark)
+      return
+    }
+
     if (isTransitioning) return
 
     setIsTransitioning(true)
@@ -61,6 +71,11 @@ export function useThemeRipple(
   }, [isDark, setIsDark, isTransitioning])
 
   return {
+    /**
+     * 是否支持 View Transition API
+     */
+    isSupported,
+
     /**
      * 是否正在进行过渡动画
      */

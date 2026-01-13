@@ -34,7 +34,9 @@
     "prepublishOnly": "pnpm run build",
     "release": "pnpm version patch && pnpm publish --access public",
     "release:minor": "pnpm version minor && pnpm publish --access public",
-    "release:major": "pnpm version major && pnpm publish --access public"
+    "release:major": "pnpm version major && pnpm publish --access public",
+    "build:demo": "cd example/react && pnpm run build",
+    "deploy:demo": "pnpm build:demo && gh-pages -d docs"
   },
   "type": "module",
   "keywords": [
@@ -50,13 +52,13 @@
     "animation"
   ],
   "author": "ImChrisChen <imchrisorz@gmail.com>",
-  "homepage": "https://github.com/ImChrisChen/use-transition-change-theme#readme",
+  "homepage": "https://github.com/ImChrisChen/theme-ripple#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ImChrisChen/use-transition-change-theme.git"
+    "url": "git+https://github.com/ImChrisChen/theme-ripple.git"
   },
   "bugs": {
-    "url": "https://github.com/ImChrisChen/use-transition-change-theme/issues"
+    "url": "https://github.com/ImChrisChen/theme-ripple/issues"
   },
   "license": "MIT",
   "peerDependencies": {

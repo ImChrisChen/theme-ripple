@@ -2,10 +2,12 @@
 
 [![npm version](https://img.shields.io/npm/v/@imccc/theme-ripple.svg)](https://www.npmjs.com/package/@imccc/theme-ripple)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Live Demo](https://img.shields.io/badge/Live-Demo-brightgreen.svg)](https://theme-ripple.imccc.dev)
 
 Smooth theme transitions for **Vue** and **React** using the [View Transition API](https://developer.mozilla.org/en-US/docs/Web/API/View_Transitions_API).
 
 ![Demo](./img_1.png)
+![Demo](./ScreenShot_2026-01-13_094043_380.png)
 
 ## ✨ Features
 
@@ -40,7 +42,7 @@ import { useThemeRipple } from '@imccc/theme-ripple/vue'
 
 const isDark = ref(false)
 
-const { toggleTheme, isTransitioning } = useThemeRipple(
+const { toggleTheme, isTransitioning, isSupported } = useThemeRipple(
   isDark,
   (dark) => {
     isDark.value = dark
@@ -61,7 +63,7 @@ const handleClick = (event: MouseEvent) => {
 
 <template>
   <button @click="handleClick" :disabled="isTransitioning">
-    Toggle Theme
+    Toggle Theme {{ isSupported ? '(Animated)' : '(Instant)' }}
   </button>
 </template>
 ```
@@ -80,7 +82,7 @@ function App() {
     document.documentElement.classList.toggle('dark', dark)
   }, [])
 
-  const { toggleTheme, isTransitioning } = useThemeRipple(isDark, setIsDark, true)
+  const { toggleTheme, isTransitioning, isSupported } = useThemeRipple(isDark, setIsDark, true)
 
   const handleClick = (event: React.MouseEvent) => {
     toggleTheme({
@@ -93,7 +95,7 @@ function App() {
 
   return (
     <button onClick={handleClick} disabled={isTransitioning}>
-      Toggle Theme
+      Toggle Theme {isSupported ? '(Animated)' : '(Instant)'}
     </button>
   )
 }
@@ -115,6 +117,7 @@ function App() {
 |----------|------|-------------|
 | `toggleTheme` | `(options) => void` | Function to trigger theme transition |
 | `isTransitioning` | `Ref<boolean>` (Vue) / `boolean` (React) | Whether a transition is in progress |
+| `isSupported` | `Ref<boolean>` (Vue) / `boolean` (React) | Whether the browser supports View Transition API |
 
 ### `toggleTheme(options)`
 
@@ -125,7 +128,7 @@ function App() {
 | `duration` | `number` | `400` | Animation duration in ms |
 | `animation` | `string` | `'ease-in'` | CSS easing function |
 | `direction` | `Direction` | - | Preset direction (overrides x/y) |
-| `borderRadius` | `number` | - | Use rounded rectangle instead of circle |
+<!-- | `borderRadius` | `number` | - | Use rounded rectangle instead of circle | -->
 
 ### Direction Options
 
@@ -143,13 +146,6 @@ function App() {
 ## 🌐 Browser Support
 
 This library uses the [View Transition API](https://caniuse.com/view-transitions). For unsupported browsers, the theme will change immediately without animation.
-
-| Browser | Support |
-|---------|---------|
-| Chrome | ✅ 111+ |
-| Edge | ✅ 111+ |
-| Safari | ✅ 18+ |
-| Firefox | ❌ Not yet |
 
 ## 📄 License
 

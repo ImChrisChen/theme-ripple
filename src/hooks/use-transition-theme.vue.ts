@@ -19,9 +19,13 @@ export function useThemeRipple(
   isAutoChangeTheme = true
 ) {
   const isTransitioning = ref(false)
+  const isSupported = ref(!!document.startViewTransition)
   let cleanup: (() => void) | null = null
 
   onMounted(() => {
+    // 再次更新，确保 SSR 兼容
+    isSupported.value = !!document.startViewTransition
+
     if (!isAutoChangeTheme) return
 
     // 设置监听器并保存清理函数
@@ -38,6 +42,11 @@ export function useThemeRipple(
 
   return {
     /**
+     * 是否支持 View Transition API
+     */
+    isSupported,
+
+    /**
      * 是否正在进行过渡动画
      */
     isTransitioning,
@@ -47,6 +56,12 @@ export function useThemeRipple(
      * @param options 切换选项，包含点击位置坐标
      */
     toggleTheme: async (options: ToggleThemeOptions) => {
+      // 如果不支持，直接切换并返回
+      if (!isSupported.value) {
+        setIsDark(!isDark.value)
+        return
+      }
+
       if (isTransitioning.value) return
 
       isTransitioning.value = true

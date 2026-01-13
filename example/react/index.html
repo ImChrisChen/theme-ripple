@@ -4,15 +4,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>React Theme Transition Demo | use-transition-change-theme</title>
+  <title>React Theme Ripple Demo | @imccc/theme-ripple</title>
   <meta name="description"
-    content="Interactive demo of smooth theme transitions in React using View Transition API. Toggle between light and dark themes with beautiful circular animations.">
-  <meta name="keywords" content="react, theme transition, dark mode, light mode, view transition api, animation, demo">
+    content="Interactive demo of theme-ripple: smooth theme transitions in React using View Transition API. Beautiful ripple animation for dark/light mode switching.">
+  <meta name="keywords"
+    content="theme-ripple, react, useThemeRipple, theme transition, dark mode, light mode, view transition api, ripple animation, theme toggle">
   <meta name="author" content="ImChrisChen">
-  <meta property="og:title" content="React Theme Transition Demo">
-  <meta property="og:description" content="Smooth theme transitions for React using View Transition API">
+  <meta property="og:title" content="Theme Ripple - React Demo">
+  <meta property="og:description" content="Smooth ripple theme transitions for React using View Transition API">
   <meta property="og:type" content="website">
-  <link rel="canonical" href="https://github.com/ImChrisChen/use-transition-change-theme">
+  <link rel="canonical" href="https://github.com/ImChrisChen/theme-ripple">
   <style>
     * {
       margin: 0;
@@ -42,6 +43,22 @@
       color: white;
       margin-bottom: 40px;
       font-size: 2.5rem;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    h2 {
+      text-align: center;
+      color: white;
+      margin-bottom: 40px;
+      font-size: 2.5rem;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    h3 {
+      text-align: center;
+      color: white;
+      margin-bottom: 20px;
+      font-size: 1.5rem;
       text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
     }
 
@@ -214,15 +231,89 @@
       font-size: 14px;
     }
 
+    /* New Styles */
+    .header-section {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .header-section h1 {
+      margin-bottom: 10px;
+    }
+
+    .subtitle {
+      color: rgba(255, 255, 255, 0.9);
+      font-size: 1.2rem;
+      margin-bottom: 20px;
+    }
+
+    .badges {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      align-items: center;
+    }
+
     .framework-badge {
       display: inline-block;
-      padding: 5px 15px;
+      padding: 5px 12px;
+      border-radius: 15px;
+      font-weight: 600;
+      font-size: 13px;
+    }
+
+    .framework-badge.react {
       background: #61dafb;
       color: #20232a;
-      border-radius: 20px;
-      font-weight: 600;
-      font-size: 14px;
+    }
+
+    .github-link {
+      display: inline-block;
+      padding: 5px 12px;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 15px;
+      color: white;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 500;
+      transition: background 0.2s;
+    }
+
+    .github-link:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
+
+    .code-section,
+    .install-section {
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 15px;
+      padding: 20px;
       margin-bottom: 20px;
+      backdrop-filter: blur(5px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      margin-top: 30px;
+    }
+
+    .code-section h3,
+    .install-section h3 {
+      color: white;
+      margin-bottom: 15px;
+      font-size: 1.1rem;
+    }
+
+    pre {
+      background: rgba(0, 0, 0, 0.3);
+      padding: 15px;
+      border-radius: 10px;
+      overflow-x: auto;
+      font-family: 'Fira Code', 'Consolas', 'Monaco', monospace;
+      font-size: 14px;
+      color: #e6e6e6;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    code {
+      font-family: inherit;
     }
   </style>
 </head>
