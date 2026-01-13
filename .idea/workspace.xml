@@ -4,15 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ed883c62-6b14-4851-bc31-89471fdd973a" name="Changes" comment="chore: add description，author">
-      <change afterPath="$PROJECT_DIR$/example/vue/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/vue/main.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/vue/package.json" afterDir="false" />
+    <list default="true" id="ed883c62-6b14-4851-bc31-89471fdd973a" name="Changes" comment="feat: add vue example">
       <change afterPath="$PROJECT_DIR$/example/vue/pnpm-lock.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/vue/vite.config.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/react/main.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/example/react/main.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pnpm-lock.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pnpm-lock.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -139,7 +133,7 @@
       <workItem from="1716994880588" duration="5866000" />
       <workItem from="1719559647912" duration="3246000" />
       <workItem from="1719571287310" duration="2415000" />
-      <workItem from="1768270106943" duration="561000" />
+      <workItem from="1768270106943" duration="580000" />
     </task>
     <task id="LOCAL-00001" summary="feat: 1.0.0">
       <option name="closed" value="true" />
@@ -157,7 +151,15 @@
       <option name="project" value="LOCAL" />
       <updated>1717001123274</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="feat: add vue example">
+      <option name="closed" value="true" />
+      <created>1768270670774</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1768270670774</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -189,7 +191,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="feat: 1.0.0" />
     <MESSAGE value="chore: add description，author" />
-    <option name="LAST_COMMIT_MESSAGE" value="chore: add description，author" />
+    <MESSAGE value="feat: add vue example" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: add vue example" />
   </component>
   <component name="github-copilot-workspace">
     <instructionFileLocations>

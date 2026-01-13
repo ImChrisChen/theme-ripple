@@ -6,6 +6,8 @@
 
 Smooth theme transitions for **Vue** and **React** using the [View Transition API](https://developer.mozilla.org/en-US/docs/Web/API/View_Transitions_API).
 
+[**Live Demo**](https://theme-ripple.imccc.dev)
+
 ![Demo](./img_1.png)
 ![Demo](./ScreenShot_2026-01-13_094043_380.png)
 

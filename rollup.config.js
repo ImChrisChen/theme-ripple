@@ -1,6 +1,4 @@
-import vue from 'rollup-plugin-vue';
 import typescript from 'rollup-plugin-typescript2';
-import commonjs from '@rollup/plugin-commonjs';
 
 const createConfig = (input, outputName, external) => ({
   input,
@@ -17,13 +15,6 @@ const createConfig = (input, outputName, external) => ({
     },
   ],
   plugins: [
-    commonjs(),
-    vue({
-      css: true,
-      template: {
-        isProduction: true,
-      },
-    }),
     typescript({
       tsconfig: 'tsconfig.json',
       useTsconfigDeclarationDir: true,
