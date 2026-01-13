@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import { createRoot } from 'react-dom/client'
-import { useThemeRipple } from '../../src/hooks/use-transition-theme.react'
+// import { useThemeRipple } from '../../src/hooks/use-transition-theme.react'
+import { useThemeRipple } from '../../dist/react'
 
 import { Direction } from '../../src/interfaces'
 
