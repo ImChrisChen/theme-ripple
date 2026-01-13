@@ -1,8 +1,4 @@
-// 主入口 - 同时导出 Vue 和 React hooks
-// Vue Hook
-export { useThemeRipple as useThemeRippleVue } from './hooks/use-transition-theme.vue'
-
-// React Hook  
+// React 入口
 export { useThemeRipple } from './hooks/use-transition-theme.react'
 
 // 核心函数 (可用于其他框架)

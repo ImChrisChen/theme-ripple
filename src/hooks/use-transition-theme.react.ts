@@ -1,4 +1,4 @@
-import { useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { flushSync } from 'react-dom';
 import { ToggleThemeOptions } from "../interfaces";
 import {
@@ -8,16 +8,18 @@ import {
 } from './core';
 
 /**
- * React 主题切换 Hook
+ * React 主题切换 Hook (使用 View Transition API 实现涟漪效果)
  * @param isDark 是否为暗黑模式
  * @param setIsDark 设置暗黑模式的函数
  * @param isAutoChangeTheme 是否自动跟随系统主题变化
  */
-export function useTransitionThemeReact(
+export function useThemeRipple(
   isDark: boolean,
   setIsDark: (isDark: boolean) => void,
   isAutoChangeTheme = true
 ) {
+  const [isTransitioning, setIsTransitioning] = useState(false)
+
   useEffect(() => {
     if (!isAutoChangeTheme) return
 
@@ -34,18 +36,35 @@ export function useTransitionThemeReact(
    * 切换主题
    * @param options 切换选项，包含点击位置坐标
    */
-  const toggleTheme = useCallback((options: ToggleThemeOptions) => {
-    // 使用 requestAnimationFrame 确保在下一帧执行
-    requestAnimationFrame(() => {
-      // React 状态更新是异步的，必须强制同步更新 DOM
-      // 否则 startViewTransition 无法捕获正确的新旧状态
-      flushSync(() => {
-        updateViewTransition(isDark, setIsDark, options)
+  const toggleTheme = useCallback(async (options: ToggleThemeOptions) => {
+    if (isTransitioning) return
+
+    setIsTransitioning(true)
+    try {
+      // 使用 requestAnimationFrame 确保在下一帧执行
+      await new Promise<void>((resolve) => {
+        requestAnimationFrame(async () => {
+          // React 状态更新是异步的，必须强制同步更新 DOM
+          // 否则 startViewTransition 无法捕获正确的新旧状态
+          flushSync(() => {
+            updateViewTransition(isDark, setIsDark, options)
+          })
+          resolve()
+        })
       })
-    })
-  }, [isDark, setIsDark])
+    } finally {
+      // 延迟重置状态，确保动画完成
+      setTimeout(() => {
+        setIsTransitioning(false)
+      }, options.duration ?? 400)
+    }
+  }, [isDark, setIsDark, isTransitioning])
 
   return {
+    /**
+     * 是否正在进行过渡动画
+     */
+    isTransitioning,
     toggleTheme,
   }
 }

@@ -126,15 +126,16 @@ export function executeThemeAnimation(
  * @param isDark 当前是否为暗黑模式
  * @param setIsDark 设置暗黑模式的函数
  * @param options 切换选项
+ * @returns Promise<void> 动画完成时 resolve
  */
 export function updateViewTransition(
   isDark: boolean,
   setIsDark: (isDark: boolean) => void,
   options: ToggleThemeOptions
-): void {
+): Promise<void> {
   if (!document) {
     console.error('document is not defined')
-    return
+    return Promise.resolve()
   }
 
   const opts = { ...DEFAULT_OPTIONS, ...options } as Required<ToggleThemeOptions>
@@ -143,7 +144,7 @@ export function updateViewTransition(
   if (!document.startViewTransition) {
     console.warn('document.startViewTransition is not defined')
     setIsDark(!isDark)
-    return
+    return Promise.resolve()
   }
 
   // 注入样式
@@ -157,13 +158,11 @@ export function updateViewTransition(
 
     switch (direction) {
       case 'top':
-        // x = 0;
-        // y = window.innerWidth / 2;
-        x = window.innerHeight / 2;
+        x = window.innerWidth / 2;
         y = 0;
         break
       case 'bottom':
-        x = window.innerHeight / 2;
+        x = window.innerWidth / 2;
         y = window.innerHeight;
         break
       case 'left':
@@ -179,7 +178,7 @@ export function updateViewTransition(
         y = 0;
         break
       case 'top-right':
-        x = window.innerHeight;
+        x = window.innerWidth;
         y = 0;
         break
       case 'bottom-left':
@@ -187,7 +186,7 @@ export function updateViewTransition(
         y = window.innerHeight;
         break
       case 'bottom-right':
-        x = window.innerHeight;
+        x = window.innerWidth;
         y = window.innerHeight;
         break
       default:
@@ -195,7 +194,6 @@ export function updateViewTransition(
     }
 
     // 如果仍然没有坐标，默认为中心 (或任何兜底)
-    // 之前是必传 x,y。现在变成可选，需要兜底
     if (x === undefined) x = window.innerWidth / 2
     if (y === undefined) y = window.innerHeight / 2
 
@@ -204,6 +202,9 @@ export function updateViewTransition(
     // 开始动画
     executeThemeAnimation(isDark, opts, clipPath)
   })
+
+  // 返回过渡完成的 Promise
+  return transition.finished
 }
 
 /**

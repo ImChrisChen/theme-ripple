@@ -1,11 +1,11 @@
-# use-transition-change-theme
+# theme-ripple
 
-[![npm version](https://img.shields.io/npm/v/@imccc/use-transition-change-theme.svg)](https://www.npmjs.com/package/@imccc/use-transition-change-theme)
+[![npm version](https://img.shields.io/npm/v/@imccc/theme-ripple.svg)](https://www.npmjs.com/package/@imccc/theme-ripple)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 Smooth theme transitions for **Vue** and **React** using the [View Transition API](https://developer.mozilla.org/en-US/docs/Web/API/View_Transitions_API).
 
-![Demo](example/img_1.png)
+![Demo](./img_1.png)
 
 ## ✨ Features
 
@@ -20,13 +20,13 @@ Smooth theme transitions for **Vue** and **React** using the [View Transition AP
 
 ```bash
 # npm
-npm install @imccc/use-transition-change-theme
+npm install @imccc/theme-ripple
 
 # pnpm
-pnpm add @imccc/use-transition-change-theme
+pnpm add @imccc/theme-ripple
 
 # yarn
-yarn add @imccc/use-transition-change-theme
+yarn add @imccc/theme-ripple
 ```
 
 ## 🚀 Quick Start
@@ -36,11 +36,11 @@ yarn add @imccc/use-transition-change-theme
 ```vue
 <script setup lang="ts">
 import { ref } from 'vue'
-import { useTransitionChangeTheme } from '@imccc/use-transition-change-theme'
+import { useThemeRipple } from '@imccc/theme-ripple/vue'
 
 const isDark = ref(false)
 
-const { toggleTheme } = useTransitionChangeTheme(
+const { toggleTheme, isTransitioning } = useThemeRipple(
   isDark,
   (dark) => {
     isDark.value = dark
@@ -60,7 +60,9 @@ const handleClick = (event: MouseEvent) => {
 </script>
 
 <template>
-  <button @click="handleClick">Toggle Theme</button>
+  <button @click="handleClick" :disabled="isTransitioning">
+    Toggle Theme
+  </button>
 </template>
 ```
 
@@ -68,7 +70,7 @@ const handleClick = (event: MouseEvent) => {
 
 ```tsx
 import { useState, useCallback } from 'react'
-import { useTransitionThemeReact } from '@imccc/use-transition-change-theme'
+import { useThemeRipple } from '@imccc/theme-ripple/react'
 
 function App() {
   const [isDark, setIsDarkState] = useState(false)
@@ -78,7 +80,7 @@ function App() {
     document.documentElement.classList.toggle('dark', dark)
   }, [])
 
-  const { toggleTheme } = useTransitionThemeReact(isDark, setIsDark, true)
+  const { toggleTheme, isTransitioning } = useThemeRipple(isDark, setIsDark, true)
 
   const handleClick = (event: React.MouseEvent) => {
     toggleTheme({
@@ -89,11 +91,30 @@ function App() {
     })
   }
 
-  return <button onClick={handleClick}>Toggle Theme</button>
+  return (
+    <button onClick={handleClick} disabled={isTransitioning}>
+      Toggle Theme
+    </button>
+  )
 }
 ```
 
 ## 📖 API Reference
+
+### `useThemeRipple(isDark, setIsDark, isAutoChangeTheme?)`
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `isDark` | `Ref<boolean>` (Vue) / `boolean` (React) | Current dark mode state |
+| `setIsDark` | `(dark: boolean) => void` | Function to update dark mode state |
+| `isAutoChangeTheme` | `boolean` | Auto-sync with system theme (default: `true`) |
+
+**Returns:**
+
+| Property | Type | Description |
+|----------|------|-------------|
+| `toggleTheme` | `(options) => void` | Function to trigger theme transition |
+| `isTransitioning` | `Ref<boolean>` (Vue) / `boolean` (React) | Whether a transition is in progress |
 
 ### `toggleTheme(options)`
 

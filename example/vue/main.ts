@@ -1,5 +1,5 @@
 import { createApp, ref, computed, defineComponent, h } from 'vue'
-import { useTransitionChangeTheme } from '../../src/hooks/use-transition-theme.vue'
+import { useThemeRipple } from '../../src/hooks/use-transition-theme.vue'
 import type { Direction } from '../../src/interfaces'
 
 type Animation = 'ease-in' | 'ease-out' | 'linear'
@@ -15,7 +15,7 @@ const App = defineComponent({
     const direction = ref<Direction | undefined>(undefined)
 
     // 使用 Hook
-    const { toggleTheme } = useTransitionChangeTheme(
+    const { toggleTheme } = useThemeRipple(
       isDark,
       (dark) => {
         isDark.value = dark

@@ -1,5 +1,5 @@
 {
-  "name": "@imccc/use-transition-change-theme",
+  "name": "@imccc/theme-ripple",
   "private": false,
   "version": "1.1.2",
   "description": "Smooth theme transitions for Vue and React using View Transition API",
@@ -11,6 +11,16 @@
       "types": "./dist/index.d.ts",
       "require": "./dist/index.cjs",
       "import": "./dist/index.mjs"
+    },
+    "./vue": {
+      "types": "./dist/vue.d.ts",
+      "require": "./dist/vue.cjs",
+      "import": "./dist/vue.mjs"
+    },
+    "./react": {
+      "types": "./dist/react.d.ts",
+      "require": "./dist/react.cjs",
+      "import": "./dist/react.mjs"
     }
   },
   "files": [
@@ -29,6 +39,7 @@
   "type": "module",
   "keywords": [
     "theme",
+    "theme-ripple",
     "theme-transition",
     "toggle-theme",
     "vue",
@@ -68,6 +79,7 @@
     "@rollup/plugin-commonjs": "^25.0.8",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.7",
+    "gh-pages": "^6.3.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "rollup": "^4.18.0",
