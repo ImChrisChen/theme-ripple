@@ -1,7 +1,7 @@
 {
   "name": "@imccc/theme-ripple",
   "private": false,
-  "version": "1.1.3",
+  "version": "1.1.4",
   "description": "Smooth theme transitions for Vue and React using View Transition API",
   "main": "dist/index.cjs",
   "module": "dist/index.mjs",
